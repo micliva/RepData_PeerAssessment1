@@ -21,7 +21,7 @@ data.int <- tapply(data$steps, data$interval, mean, na.rm=TRUE)
 
 ## What is mean total number of steps taken per day?
 ```{r}
-barplot(data.day)
+hist(data.day)
 mean(data.day)
 median(data.day)
 ```
@@ -36,13 +36,17 @@ names(which.max(data.int))
 ## Imputing missing values
 ```{r}
 sum(is.na(data))
+```
+
+Imputing the missing values with the average number of steps
+```{r}
 for( i in 1:dim(data)[1] ){
         if (is.na(data[[i, "steps"]])) data[[i, "steps"]] <-  data.int[as.character(data[[i, "interval"]])]
 }
 sum(is.na(data))
 data.day <- tapply(data$steps, data$date, sum)
 data.int <- tapply(data$steps, data$interval, mean)
-barplot(data.day)
+hist(data.day)
 mean(data.day)
 median(data.day)
 ```

@@ -18,7 +18,7 @@ data.int <- tapply(data$steps, data$interval, mean, na.rm=TRUE)
 ## What is mean total number of steps taken per day?
 
 ```r
-barplot(data.day)
+hist(data.day)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
@@ -66,6 +66,8 @@ sum(is.na(data))
 ## [1] 2304
 ```
 
+Imputing the missing values with the average number of steps
+
 ```r
 for( i in 1:dim(data)[1] ){
         if (is.na(data[[i, "steps"]])) data[[i, "steps"]] <-  data.int[as.character(data[[i, "interval"]])]
@@ -80,10 +82,10 @@ sum(is.na(data))
 ```r
 data.day <- tapply(data$steps, data$date, sum)
 data.int <- tapply(data$steps, data$interval, mean)
-barplot(data.day)
+hist(data.day)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
 
 ```r
 mean(data.day)
@@ -114,4 +116,4 @@ plot(dimnames(data.int)[[1]], data.int[, "weekday"], type = "l", main ="weekday"
 plot(dimnames(data.int)[[1]], data.int[, "weekend"], type = "l", main = "weekend", xlab = "interval", ylab = "")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
